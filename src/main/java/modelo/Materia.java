@@ -26,13 +26,26 @@ public class Materia {
 	}
     @Override
     public String toString() {
-        return nombre.name(); // Devuelve el nombre de la materia en formato String
-    }
+      //  return nombre.name(); 
+        return "Materia{" +
+        "nombre=" + nombre +
+        ", notas=" + notas +'}';}
 	public void agregarNota(double nota) {
 	    if (this.notas == null) {
 	        this.notas = new ArrayList<>();
 	    }
 	    this.notas.add(nota);		// TODO Auto-generated method stub
 		
+	}
+	public boolean equals(Object obj) {
+	    if (this == obj) return true;
+	    if (obj == null || getClass() != obj.getClass()) return false;
+	    Materia materia = (Materia) obj;
+	    return nombre == materia.nombre; // `nombre` es de tipo MateriaEnum
+	}
+
+	@Override
+	public int hashCode() {
+	    return nombre != null ? nombre.hashCode() : 0;
 	}
 }

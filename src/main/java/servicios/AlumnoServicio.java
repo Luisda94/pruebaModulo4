@@ -24,7 +24,6 @@ public class AlumnoServicio {
         }
     }
 
-    // Método para agregar una materia a un alumno
     public void agregarMateria(String rutAlumno, Materia materia) {
         Alumno alumno = listaAlumnos.get(rutAlumno);
         if (alumno != null) {
@@ -33,10 +32,12 @@ public class AlumnoServicio {
             }
             alumno.getMaterias().add(materia);
             System.out.println("Materia agregada con éxito al alumno con RUT: " + rutAlumno);
+            System.out.println("Materias actuales del alumno: " + alumno.getMaterias()); // Agregar esta línea para depurar
         } else {
             System.out.println("No se encontró un alumno con el RUT proporcionado.");
         }
     }
+
  // Método para agregar una nota a una materia de un alumno
     public void agregarNota(String rutAlumno, MateriaEnum materiaEnum, double nota) {
         // Busca al alumno por su RUT en el mapa
