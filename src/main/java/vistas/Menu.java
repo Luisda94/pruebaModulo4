@@ -1,20 +1,24 @@
 package vistas;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import modelo.Alumno;
+import modelo.Materia;
 import modelo.MateriaEnum;
 import servicios.AlumnoServicio;
 import servicios.ArchivosServicio;
+
 public class Menu extends PlantillaMenu {
     private AlumnoServicio alumnoServicio = new AlumnoServicio();
     private ArchivosServicio archivoServicio = new ArchivosServicio();
+    private Scanner por_teclado = new Scanner(System.in); // Mantén una única instancia de Scanner
 
     @Override
     public void exportarDatos() {
         // Lógica de exportar promedios de datos (pendiente de implementar)
-    	archivoServicio.exportarDatos(alumnoServicio.listarAlumnos(), "/ruta/donde/exportar.txt");
+        archivoServicio.exportarDatos(alumnoServicio.listarAlumnos(), "/ruta/donde/exportar.txt");
         System.out.println("--- Exportar Datos ---");
-        // Llamar a archivoServicio para exportar datos
     }
 
     @Override
@@ -38,9 +42,9 @@ public class Menu extends PlantillaMenu {
     public void agregarMateria(String rutAlumno, MateriaEnum materiaEnum) {
         // Lógica para agregar una materia
         System.out.println("--- Agregar Materia ---");
-        Scanner por_teclado = new Scanner(System.in);
         System.out.print("Ingresa rut del Alumno: ");
         String rutAlumno1 = por_teclado.nextLine();
+
         // Aquí asumes que tienes el mecanismo para seleccionar materia (MateriaEnum)
         System.out.println("Selecciona una Materia:");
         System.out.println("1. MATEMATICAS");
@@ -48,51 +52,55 @@ public class Menu extends PlantillaMenu {
         System.out.println("3. CIENCIA");
         System.out.println("4. HISTORIA");
         int opcion = por_teclado.nextInt();
-        // Elige la materia según la opción y agrega la materia
-        // Se usaría un método en AlumnoServicio que agrega la materia
-        alumnoServicio.agregarMateria(rutAlumno1, opcion);
-        System.out.println("--- Materia agregada ---");
-        por_teclado.close();
+
+        // Mapear la opción a un MateriaEnum
+        MateriaEnum materiaEnumSeleccionada = obtenerMateriaEnum(opcion);
+
+        if (materiaEnumSeleccionada != null) {
+            Materia nuevaMateria = new Materia(materiaEnumSeleccionada);
+            AlumnoServicio.agregarMateria(rutAlumno1, nuevaMateria);
+            System.out.println("--- Materia agregada ---");
+        } else {
+            System.out.println("Opción no válida.");
+        }
+    }
+
+    // Método para mapear la opción a un MateriaEnum
+    private MateriaEnum obtenerMateriaEnum(int opcion) {
+        switch (opcion) {
+            case 1: return MateriaEnum.MATEMATICAS;
+            case 2: return MateriaEnum.LENGUAJE;
+            case 3: return MateriaEnum.CIENCIA;
+            case 4: return MateriaEnum.HISTORIA;
+            default: return null;  // Retorna null si la opción no es válida
+        }
     }
 
     @Override
     public void agregarNotaPasoUno() {
-    	System.out.println("--- Agregar Materia ---");
-        Scanner por_teclado = new Scanner(System.in);
-        System.out.print("Ingresa rut del Alumno: ");
+        System.out.println("--- Agregar Nota ---");
+        System.out.print("Ingresa RUT del Alumno: ");
         String rutAlumno = por_teclado.nextLine();
-        
-        // Aquí asumes que tienes el mecanismo para seleccionar materia (MateriaEnum)
+
         System.out.println("Selecciona una Materia:");
         System.out.println("1. MATEMATICAS");
         System.out.println("2. LENGUAJE");
         System.out.println("3. CIENCIA");
         System.out.println("4. HISTORIA");
+
         int opcion = por_teclado.nextInt();
-        
-        MateriaEnum materiaEnum = null;
-        switch (opcion) {
-            case 1:
-                materiaEnum = MateriaEnum.MATEMATICAS;
-                break;
-            case 2:
-                materiaEnum = MateriaEnum.LENGUAJE;
-                break;
-            case 3:
-                materiaEnum = MateriaEnum.CIENCIA;
-                break;
-            case 4:
-                materiaEnum = MateriaEnum.HISTORIA;
-                break;
-            default:
-                System.out.println("Opción no válida.");
-                return;
+        MateriaEnum materiaEnum = obtenerMateriaEnum(opcion);
+
+        if (materiaEnum != null) {
+            System.out.print("Ingresa la nota: ");
+            double nota = por_teclado.nextDouble();
+            alumnoServicio.agregarNota(rutAlumno, materiaEnum, nota);
+            System.out.println("--- Nota agregada ---");
+        } else {
+            System.out.println("Opción no válida.");
         }
-        
-        // Usamos MateriaEnum directamente en lugar de un número
-        alumnoServicio.agregarMateria(rutAlumno, materiaEnum);
-        System.out.println("--- Materia agregada ---");
     }
+
     @Override
     public void listarAlumnos() {
         // Lógica para listar alumnos
@@ -103,10 +111,14 @@ public class Menu extends PlantillaMenu {
             System.out.println("Apellido: " + alumno.getApellido());
             System.out.println("Dirección: " + alumno.getDireccion());
             // Listar materias y notas
-            alumno.getMaterias().forEach(materia -> {
-                System.out.println("Materia: " + materia.getNombre());
-                System.out.println("Notas: " + materia.getNotas());
-            });
+            if (alumno.getMaterias() != null && !alumno.getMaterias().isEmpty()) {
+                alumno.getMaterias().forEach(materia -> {
+                    System.out.println("Materia: " + materia.getNombre());
+                    System.out.println("Notas: " + materia.getNotas());
+                });
+            } else {
+                System.out.println("Este alumno no tiene materias asignadas.");
+            }
         });
     }
 
@@ -116,24 +128,22 @@ public class Menu extends PlantillaMenu {
         System.exit(0);
     }
 
-	/**
-	 * @return the archivoServicio
-	 */
-	public ArchivosServicio getArchivoServicio() {
-		return archivoServicio;
-	}
+    /**
+     * @return the archivoServicio
+     */
+    public ArchivosServicio getArchivoServicio() {
+        return archivoServicio;
+    }
 
-	/**
-	 * @param archivoServicio the archivoServicio to set
-	 */
-	public void setArchivoServicio(ArchivosServicio archivoServicio) {
-		this.archivoServicio = archivoServicio;
-		
-	}
+    /**
+     * @param archivoServicio the archivoServicio to set
+     */
+    public void setArchivoServicio(ArchivosServicio archivoServicio) {
+        this.archivoServicio = archivoServicio;
+    }
 
-	@Override
-	public void agregarMateria() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void agregarMateria() {
+        // Este método está vacio, ya que se reemplaza con el método sobrecargado.
+    }
 }

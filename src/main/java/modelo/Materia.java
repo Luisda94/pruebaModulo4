@@ -27,4 +27,8 @@ public class Materia {
     public String toString() {
         return nombre.name(); // Devuelve el nombre de la materia en formato String
     }
+	public void agregarNota(double nota) {
+		// TODO Auto-generated method stub
+		
+	}
 }
