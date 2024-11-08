@@ -1,6 +1,8 @@
 package servicios;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -22,6 +24,18 @@ public class ArchivosServicio {
             System.out.println("Ocurrió un error al escribir el archivo: " + e.getMessage());
         }
     }
+    public void cargarDatosDesdeArchivo(String rutaArchivo) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo))) {
+            while ((reader.readLine()) != null) {
+                // Lógica para procesar la línea y convertirla en una instancia de Alumno
+                // Aquí puedes usar delimitadores y parsing según el formato del archivo
+            }
+            System.out.println("Datos cargados desde: " + rutaArchivo);
+        } catch (IOException e) {
+            System.out.println("Error al cargar datos desde el archivo: " + e.getMessage());
+        }
+    }
+
     public ArchivosServicio() {
         this.promediosServicioImp = new PromedioServicioImp(); }
     public void exportarDatos(Map<String, Alumno> alumnos, String rutaArchivo) {
