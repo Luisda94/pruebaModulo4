@@ -1,14 +1,15 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Materia {
 	private MateriaEnum nombre;
     private List<Double> notas;
     
-    public Materia(MateriaEnum nombre, List<Double> notas) {
+    public Materia(MateriaEnum nombre) {
         this.nombre = nombre;
-        this.notas = notas;
+        this.notas = new ArrayList<>();
     }
     public MateriaEnum getNombre() {
 		return nombre;
