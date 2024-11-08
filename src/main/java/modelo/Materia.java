@@ -22,5 +22,8 @@ public class Materia {
 	public void setNotas(List<Double> notas) {
 		this.notas = notas;
 	}
-
+    @Override
+    public String toString() {
+        return nombre.name(); // Devuelve el nombre de la materia en formato String
+    }
 }
