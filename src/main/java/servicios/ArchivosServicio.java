@@ -2,10 +2,12 @@ package servicios;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import modelo.Alumno;
+import modelo.Materia;
 
 public class ArchivosServicio {
 	   // Atributo donde se almacenarán los alumnos temporalmente mientras se itera un archivo.
@@ -24,7 +26,7 @@ public class ArchivosServicio {
                 writer.write("Alumno: " + alumno.getRut() + " - " + alumno.getNombre() + " " + alumno.getApellido());
                 writer.newLine();
                 if (alumno.getMaterias() != null) {
-                    for (var materia : alumno.getMaterias()) {
+                    for (Materia materia : alumno.getMaterias()) {
                         double promedio = promediosServicioImp.calcularPromedio(materia.getNotas());
                         writer.write("Materia: " + materia.getNombre() + " - Promedio: " + promedio);
                         writer.newLine();
