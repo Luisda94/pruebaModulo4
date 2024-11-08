@@ -7,7 +7,10 @@ import modelo.Materia;
 import modelo.MateriaEnum;
 import servicios.AlumnoServicio;
 import servicios.ArchivosServicio;
-
+/**
+ * Clase que extiende MenuTemplate y proporciona implementaciones específicas
+ * para las operaciones del menú relacionadas con la gestión de alumnos y materias.
+ */
 public class Menu extends MenuTemplate  {
     private AlumnoServicio alumnoServicio = new AlumnoServicio();
     private ArchivosServicio archivoServicio = new ArchivosServicio();

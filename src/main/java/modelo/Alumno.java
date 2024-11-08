@@ -2,7 +2,9 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Clase que representa un Alumno con atributos básicos y una lista de materias.
+ */
 public class Alumno {
     private String rut;
     private String nombre;

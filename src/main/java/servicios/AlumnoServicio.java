@@ -8,7 +8,9 @@ import java.util.Map;
 import modelo.Alumno;
 import modelo.Materia;
 import modelo.MateriaEnum;
-
+/**
+ * Servicio para gestionar operaciones relacionadas con alumnos.
+ */
 public class AlumnoServicio {
 	// Mapa para almacenar alumnos, donde la clave es el RUT del alumno
     private Map<String, Alumno> listaAlumnos = new HashMap<>();

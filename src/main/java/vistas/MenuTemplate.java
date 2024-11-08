@@ -4,13 +4,21 @@ import java.util.Scanner;
 
 import interfaces.IMenuAcciones;
 import modelo.MateriaEnum;
-
+/**
+ * Clase abstracta que define el comportamiento general de un menú.
+ * Implementa la interfaz IMenuAcciones, proporcionando un esqueleto para
+ * la lógica de menú en aplicaciones que gestionan datos de alumnos y materias.
+ * Las clases hijas deben sobrescribir los métodos para definir la lógica específica.
+ */
 public abstract class MenuTemplate implements IMenuAcciones {
 	protected Scanner por_teclado;
 
 	/**
 	 * @param por_teclado
 	 */
+    /**
+     * Constructor que inicializa el objeto Scanner por_teclado para leer entradas del usuario.
+     */
 	public MenuTemplate () {
 
 		this.por_teclado = new Scanner(System.in);

@@ -3,6 +3,10 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que representa una Materia asociada a un Alumno.
+ * Contiene el nombre de la materia y una lista de notas.
+ */
 public class Materia {
 	private MateriaEnum nombre;
     private List<Double> notas;
