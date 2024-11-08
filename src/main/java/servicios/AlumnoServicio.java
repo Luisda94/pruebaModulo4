@@ -22,11 +22,6 @@ public class AlumnoServicio {
 		}
 	}
 
-	//
-	public void agregarMateria(String rutAlumno, int opcion) {
-		// TODO Auto-generated method stub
-		// Método para agregar una materia a un alumno
-	}
 
 	public void agregarMateria(String rutAlumno, Materia materia, int opcio) {
 		Alumno alumno = listaAlumnos.get(rutAlumno);
