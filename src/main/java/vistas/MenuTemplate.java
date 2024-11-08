@@ -2,9 +2,10 @@ package vistas;
 
 import java.util.Scanner;
 
+import interfaces.IMenuAcciones;
 import modelo.MateriaEnum;
 
-public abstract class MenuTemplate  {
+public abstract class MenuTemplate implements IMenuAcciones {
 	protected Scanner por_teclado;
 
 	/**
@@ -14,8 +15,7 @@ public abstract class MenuTemplate  {
 
 		this.por_teclado = new Scanner(System.in);
 	}
-	// Métodos a sobrescribir en subclases
-    // Métodos sin implementación
+  
     public void exportarDatos() {}
     public void crearAlumno() {}
     public void agregarMateria() {}
