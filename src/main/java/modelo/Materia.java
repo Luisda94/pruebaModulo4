@@ -11,6 +11,7 @@ public class Materia {
         this.nombre = nombre;
         this.notas = new ArrayList<>();
     }
+    
     public MateriaEnum getNombre() {
 		return nombre;
 	}
@@ -28,7 +29,10 @@ public class Materia {
         return nombre.name(); // Devuelve el nombre de la materia en formato String
     }
 	public void agregarNota(double nota) {
-		// TODO Auto-generated method stub
+	    if (this.notas == null) {
+	        this.notas = new ArrayList<>();
+	    }
+	    this.notas.add(nota);		// TODO Auto-generated method stub
 		
 	}
 }

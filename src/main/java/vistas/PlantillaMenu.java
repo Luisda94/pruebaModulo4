@@ -2,6 +2,8 @@ package vistas;
 
 import java.util.Scanner;
 
+import modelo.MateriaEnum;
+
 public abstract class PlantillaMenu {
 	protected Scanner por_teclado;
 
@@ -60,6 +62,6 @@ public abstract class PlantillaMenu {
             }
         } while (opcion != 5);
     }
-	/*public void agregarMateria(String rutAlumno, MateriaEnum materiaEnum) {
-	}*/
+	public void agregarMateria(String rutAlumno, MateriaEnum materiaEnum) {
+	}
 }

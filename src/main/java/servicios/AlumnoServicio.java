@@ -7,6 +7,7 @@ import java.util.Map;
 
 import modelo.Alumno;
 import modelo.Materia;
+import modelo.MateriaEnum;
 
 public class AlumnoServicio {
 	// Mapa para almacenar alumnos, donde la clave es el RUT del alumno
@@ -19,6 +20,7 @@ public class AlumnoServicio {
         } else {
             listaAlumnos.put(alumno.getRut(), alumno);
             System.out.println("Alumno agregado con éxito.");
+        
         }
     }
 
@@ -34,6 +36,27 @@ public class AlumnoServicio {
         } else {
             System.out.println("No se encontró un alumno con el RUT proporcionado.");
         }
+    }
+ // Método para agregar una nota a una materia de un alumno
+    public void agregarNota(String rutAlumno, MateriaEnum materiaEnum, double nota) {
+        // Busca al alumno por su RUT en el mapa
+        Alumno alumno = listaAlumnos.get(rutAlumno);
+        if (alumno == null) {
+            System.out.println("El alumno no existe.");
+            return;
+        }
+        
+        // Busca la materia dentro de la lista de materias del alumno
+        for (Materia materia : alumno.getMaterias()) {
+            if (materia.getNombre().equals(materiaEnum)) {
+                materia.agregarNota(nota); // Asegúrate de que el método `agregarNota` exista en la clase `Materia`
+                System.out.println("Nota agregada con éxito a la materia " + materiaEnum);
+                return;
+            }
+        }
+        
+        // Si la materia no existe
+        System.out.println("El alumno no tiene la materia " + materiaEnum);
     }
 
     // Método para obtener la lista de materias de un alumno por RUT

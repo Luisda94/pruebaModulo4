@@ -22,6 +22,7 @@ public class Alumno {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.direccion = direccion;
+		this.materias = new ArrayList<>(); 
 	}
 
 	public String getRut() {

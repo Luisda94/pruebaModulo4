@@ -14,12 +14,16 @@ public class ArchivosServicio {
     private List<Alumno> alumnosACargar;
     // Instancia de la clase PromedioServicioImp para calcular promedios.
     private PromedioServicioImp promediosServicioImp;
-
-    public ArchivosServicio() {
-        this.promediosServicioImp = new PromedioServicioImp(); // Inicializamos la instancia
+    public void crearArchivo(String nombreArchivo, String contenido) {
+        try (FileWriter writer = new FileWriter(nombreArchivo)) {
+            writer.write(contenido);
+            System.out.println("Archivo " + nombreArchivo + " creado y escrito correctamente.");
+        } catch (IOException e) {
+            System.out.println("Ocurrió un error al escribir el archivo: " + e.getMessage());
+        }
     }
-
-    // Método para exportar datos de alumnos a un archivo.
+    public ArchivosServicio() {
+        this.promediosServicioImp = new PromedioServicioImp(); }
     public void exportarDatos(Map<String, Alumno> alumnos, String rutaArchivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
             for (Alumno alumno : alumnos.values()) {

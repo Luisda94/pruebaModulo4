@@ -1,6 +1,5 @@
 package vistas;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import modelo.Alumno;
@@ -14,7 +13,7 @@ public class Menu extends PlantillaMenu {
     private ArchivosServicio archivoServicio = new ArchivosServicio();
     private Scanner por_teclado = new Scanner(System.in); // Mantén una única instancia de Scanner
 
-    @Override
+
     public void exportarDatos() {
         // Lógica de exportar promedios de datos (pendiente de implementar)
         archivoServicio.exportarDatos(alumnoServicio.listarAlumnos(), "/ruta/donde/exportar.txt");
@@ -76,7 +75,6 @@ public class Menu extends PlantillaMenu {
         }
     }
 
-    @Override
     public void agregarNotaPasoUno() {
         System.out.println("--- Agregar Nota ---");
         System.out.print("Ingresa RUT del Alumno: ");
@@ -88,12 +86,30 @@ public class Menu extends PlantillaMenu {
         System.out.println("3. CIENCIA");
         System.out.println("4. HISTORIA");
 
-        int opcion = por_teclado.nextInt();
+        int opcion;
+        try {
+            opcion = por_teclado.nextInt();
+            por_teclado.nextLine(); // Limpia el buffer después de nextInt
+        } catch (Exception e) {
+            System.out.println("Opción inválida. Inténtalo de nuevo.");
+            por_teclado.nextLine(); // Limpia el buffer en caso de error
+            return;
+        }
+
         MateriaEnum materiaEnum = obtenerMateriaEnum(opcion);
 
         if (materiaEnum != null) {
-            System.out.print("Ingresa la nota: ");
-            double nota = por_teclado.nextDouble();
+            double nota;
+            try {
+                System.out.print("Ingresa la nota: ");
+                nota = por_teclado.nextDouble();
+                por_teclado.nextLine(); // Limpia el buffer después de nextDouble
+            } catch (Exception e) {
+                System.out.println("Nota inválida. Inténtalo de nuevo.");
+                por_teclado.nextLine(); // Limpia el buffer en caso de error
+                return;
+            }
+
             alumnoServicio.agregarNota(rutAlumno, materiaEnum, nota);
             System.out.println("--- Nota agregada ---");
         } else {
@@ -101,7 +117,6 @@ public class Menu extends PlantillaMenu {
         }
     }
 
-    @Override
     public void listarAlumnos() {
         // Lógica para listar alumnos
         System.out.println("--- Listar Alumnos ---");
