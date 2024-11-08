@@ -8,7 +8,7 @@ import modelo.MateriaEnum;
 import servicios.AlumnoServicio;
 import servicios.ArchivosServicio;
 
-public class Menu extends PlantillaMenu {
+public class Menu extends MenuTemplate  {
     private AlumnoServicio alumnoServicio = new AlumnoServicio();
     private ArchivosServicio archivoServicio = new ArchivosServicio();
     private Scanner por_teclado = new Scanner(System.in); // Mantén una única instancia de Scanner

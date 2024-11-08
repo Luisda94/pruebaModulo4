@@ -4,25 +4,25 @@ import java.util.Scanner;
 
 import modelo.MateriaEnum;
 
-public abstract class PlantillaMenu {
+public abstract class MenuTemplate  {
 	protected Scanner por_teclado;
 
 	/**
 	 * @param por_teclado
 	 */
-	public PlantillaMenu(/*Scanner por_teclado*/) {
-		/*super();
-		this.por_teclado = por_teclado;*/
+	public MenuTemplate () {
+
 		this.por_teclado = new Scanner(System.in);
 	}
 	// Métodos a sobrescribir en subclases
-    public abstract void exportarDatos();
-    public abstract void crearAlumno();
-    public abstract void agregarMateria();
-    public abstract void agregarNotaPasoUno();
-    public abstract void listarAlumnos();
-    public abstract void terminarPrograma();
-
+    // Métodos sin implementación
+    public void exportarDatos() {}
+    public void crearAlumno() {}
+    public void agregarMateria() {}
+    public void agregarNotaPasoUno() {}
+    public void listarAlumnos() {}
+    public void terminarPrograma() {}
+    
     // Método no sobrescribible
     public final void iniciarMenu() {
         int opcion;
