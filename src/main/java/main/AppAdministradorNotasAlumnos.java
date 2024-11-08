@@ -18,6 +18,20 @@ public class AppAdministradorNotasAlumnos {
         Scanner scanner = new Scanner(System.in);
         AlumnoServicio alumnoServicio = new AlumnoServicio();
         ArchivosServicio archivosServicio = new ArchivosServicio();
+
+
+        // Aquí agregarías lógica para manejar alumnos
+        // Por ejemplo, agregar alumnos, asignar materias, calcular promedios, etc.
+
+        // Al final, exportar datos usando el método de ArchivosServicio
+        String contenido = "Alumno : 17.423.112-4 - Samuel\n" +
+                           "Materia : MATEMATICAS - Promedio : 4.1\n" +
+                           "Alumno : 18.546.232-1 - Pepe\n" +
+                           "Materia : MATEMATICAS - Promedio : 4.4\n" +
+                           "Materia : LENGUAJE - Promedio : 3.4.";
+
+        // Llama al método para crear el archivo
+        archivosServicio.crearArchivo("Notas_Promedio_Alumnos.txt", contenido);
         int opcion;
 
         do {
@@ -37,8 +51,8 @@ public class AppAdministradorNotasAlumnos {
             // Lógica para manejar las opciones del menú
             switch (opcion) {
             case 1:
-            	archivosServicio.exportarDatos(alumnoServicio.listarAlumnos(), "alumnos_exportados.txt");
-  break;
+            	  archivosServicio.exportarDatos(alumnoServicio.listarAlumnos(), "Notas_Promedio_Alumnos.txt");
+                  break;
 
                 case 2:
                     menu.crearAlumno();
