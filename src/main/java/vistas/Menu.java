@@ -54,4 +54,18 @@ public class Menu extends PlantillaMenu {
         System.out.println("Finalizando programa...");
         System.exit(0);
     }
+
+	/**
+	 * @return the archivoServicio
+	 */
+	public ArchivosServicio getArchivoServicio() {
+		return archivoServicio;
+	}
+
+	/**
+	 * @param archivoServicio the archivoServicio to set
+	 */
+	public void setArchivoServicio(ArchivosServicio archivoServicio) {
+		this.archivoServicio = archivoServicio;
+	}
 }
