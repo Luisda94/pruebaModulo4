@@ -58,7 +58,7 @@ public class Menu extends PlantillaMenu {
 
         if (materiaEnumSeleccionada != null) {
             Materia nuevaMateria = new Materia(materiaEnumSeleccionada);
-            AlumnoServicio.agregarMateria(rutAlumno1, nuevaMateria);
+            alumnoServicio.agregarMateria(rutAlumno1, nuevaMateria);
             System.out.println("--- Materia agregada ---");
         } else {
             System.out.println("Opción no válida.");
